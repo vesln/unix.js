@@ -41,6 +41,16 @@ describe('unix', function() {
       });
     });
 
+    it('can match output with regexps', function() {
+      unix()
+      .run('ls /invalid')
+      .stderr(/No such file or directory/)
+      .end(function(err) {
+        (err === null).should.be.true;
+        done();
+      });
+    });
+
     it('returns an error if the output does not match the expected text', function(done) {
       unix()
       .run('ls /invalid')
@@ -83,4 +93,6 @@ describe('unix', function() {
   xit('supports env vars for a command');
   xit('supports before & after filters');
   xit('throws an error if no command is supplied');
+  xit('custom error that includes all of the failed expectations');
+  // assertions -> expectations
 });
