@@ -1,0 +1,25 @@
+{
+  "name": "unix",
+  "version": "0.0.0",
+  "description": "Simple framework for testing unix apps",
+  "main": "./index.js",
+  "homepage": "https://github.com/vesln/unix.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vesln/unix.js"
+  },
+  "keywords": [],
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*"
+  },
+  "author": "Veselin Todorov <hi@vesln.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.6.0"
+  }
+}
