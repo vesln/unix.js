@@ -10,7 +10,7 @@ describe('unix', function() {
     it('does not return an error when the output matches the expected text', function(done) {
       unix()
       .run('ls ' + __filename)
-      .stdout(__filename + '\n')
+      .stdout(__filename)
       .end(function(err) {
         (err === null).should.be.true;
         done();
@@ -23,7 +23,7 @@ describe('unix', function() {
       .stdout('Invalid')
       .end(function(err) {
         err.message.should.eq(
-          'Stdout from "ls ' + __filename +'": Expected "Invalid" to equal "' + __filename + '\n"'
+          'Stdout from "ls ' + __filename +'": Expected "Invalid" to equal "' + __filename + '"'
         );
         done();
       });
@@ -34,7 +34,7 @@ describe('unix', function() {
     it('does not return an error when the output matches the expected text', function(done) {
       unix()
       .run('ls /invalid')
-      .stderr('ls: /invalid: No such file or directory\n')
+      .stderr('ls: /invalid: No such file or directory')
       .end(function(err) {
         (err === null).should.be.true;
         done();
@@ -47,7 +47,7 @@ describe('unix', function() {
       .stderr('Invalid')
       .end(function(err) {
         err.message.should.eq(
-          'Stderr from "ls /invalid": Expected "Invalid" to equal "ls: /invalid: No such file or directory\n"'
+          'Stderr from "ls /invalid": Expected "Invalid" to equal "ls: /invalid: No such file or directory"'
         );
         done();
       });
