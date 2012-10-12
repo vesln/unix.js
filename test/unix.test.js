@@ -22,7 +22,33 @@ describe('unix', function() {
       .run('ls ' + __filename)
       .stdout('Invalid')
       .end(function(err) {
-        err.message.should.eq('Expected "ls Readme.md" to print "lols" but it printed "lols"');
+        err.message.should.eq(
+          'Stdout from "ls ' + __filename +'": Expected "Invalid" to equal "' + __filename + '\n"'
+        );
+        done();
+      });
+    });
+  });
+
+  describe('when asserting on stderr', function() {
+    it('does not return an error when the output matches the expected text', function(done) {
+      unix()
+      .run('ls /invalid')
+      .stderr('ls: /invalid: No such file or directory\n')
+      .end(function(err) {
+        (err === null).should.be.true;
+        done();
+      });
+    });
+
+    it('returns an error if the output does not match the expected text', function(done) {
+      unix()
+      .run('ls /invalid')
+      .stderr('Invalid')
+      .end(function(err) {
+        err.message.should.eq(
+          'Stderr from "ls /invalid": Expected "Invalid" to equal "ls: /invalid: No such file or directory\n"'
+        );
         done();
       });
     });
@@ -52,8 +78,9 @@ describe('unix', function() {
 
   xit('can ignore colors');
   xit('can ignore new lines');
-  xit('can assert on stderr');
+  xit('can assert on stderr and stdout with regexps');
   xit('supports timeouts');
   xit('supports env vars for a command');
+  xit('supports before & after filters');
   xit('throws an error if no command is supplied');
 });
